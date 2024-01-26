@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in list %}
+                {% if i["quantity"] > 0 %}
+                <tr>
+                    <td>{{ i["symbol"].upper() }}</td>
+                    <td>{{ i["quantity"] }}</td>
+                    <td>{{ "$" '%0.2f'| format(current_price) }}</td>
+                    <td>{{ "$" '%0.2f'| format(total) }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+
+            <tr>
+                <td colspan="2"></td>
+                <td>Cash</td>
+                <td>{{"$"'%0.2f'| format(cash) }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>TOTAL</td>
+                <td>{{"$"'%0.2f'| format(grandTotal) }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}
